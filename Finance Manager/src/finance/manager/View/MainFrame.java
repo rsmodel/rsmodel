@@ -5,7 +5,8 @@
  */
 package finance.manager.View;
 
-import finance.manager.View.menubar.MainMenubar;
+import finance.manager.View.menubar.MenubarManager;
+import finance.manager.View.tabbedpane.TabbedPaneManager;
 import javax.swing.JFrame;
 
 /**
@@ -21,7 +22,8 @@ public class MainFrame extends JFrame{
         
         this.addWindowListener(_window_listener);
         
-        MainMenubar.getInstance().setMenuBar(this);
+        MenubarManager.getInstance().setMenuBar(this);
+        TabbedPaneManager.getInstance().addTabbedPane(this);
     }
     
     

@@ -12,16 +12,19 @@ import javax.swing.JMenuBar;
  *
  * @author User
  */
-public class MainMenubar {
-
-    private JMenuBar _menubar;    
-    private static MainMenubar _instance = new MainMenubar();
+public class MenubarManager {
     
-    public static MainMenubar getInstance() {
+    private JMenuBar _menubar;    
+    private static MenubarManager _instance = new MenubarManager();
+    
+    public static MenubarManager getInstance() {
         return _instance;
     }
-    private MainMenubar() {
+    private MenubarManager() {
         _menubar = new JMenuBar();
+        
+        FileMenu.getInstance().addMenu(_menubar);
+        
     }
  
     public void setMenuBar(JFrame frame) {
