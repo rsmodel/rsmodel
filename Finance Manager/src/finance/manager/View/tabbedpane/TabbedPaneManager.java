@@ -6,6 +6,8 @@
 package finance.manager.View.tabbedpane;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.util.HashMap;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,30 +27,31 @@ public class TabbedPaneManager {
     }
     
     private JTabbedPane _tabbedPane = null;
-       
+    private HashMap<String, JComponent> _panels = new HashMap<String, JComponent>();   
     
     private TabbedPaneManager() {
         _tabbedPane = new JTabbedPane();
         
-        JComponent panel1 = makeTextPanel("Panel #1");
-        panel1.setName("Init");
-        _tabbedPane.addTab("Init", panel1); 
-        
-    }
-    
-    public boolean panelExist(String name) {
-        boolean test = false;
-        for(int i = 0; i < _tabbedPane.getTabCount();++i)
-            test = (_tabbedPane.getTabComponentAt(i).getName()==name);
-        return test;
+        addPane("init", (JPanel) makeTextPanel("Panel #1"));
     }
     
     public void addPane(String name, JPanel panel) {
+        if(_panels.containsKey(name)) return;
+        _panels.put(name, panel);
         _tabbedPane.addTab(name, panel);
+        
     }
     
     public void addTabbedPane(JFrame frame) {
         frame.add(_tabbedPane);
+    }
+    public boolean hasPanel(String name) {
+        return _panels.containsKey(name);
+    }
+    
+    public void removePanel(String name) {
+        _tabbedPane.remove(_panels.get(name));
+        _panels.remove(name);
     }
     
     protected JComponent makeTextPanel(String text) {
@@ -59,4 +62,5 @@ public class TabbedPaneManager {
         panel.add(filler);
         return panel;
     }
+
 }
