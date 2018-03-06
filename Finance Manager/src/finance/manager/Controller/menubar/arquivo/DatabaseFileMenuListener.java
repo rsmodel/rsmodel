@@ -21,7 +21,8 @@ public class DatabaseFileMenuListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        TabbedPaneManager.getInstance().addPane("Banco de Dados", new DatabaseConnectionPane());
+        if(!TabbedPaneManager.getInstance().panelExist("Banco de Dados"))
+            TabbedPaneManager.getInstance().addPane("Banco de Dados", new DatabaseConnectionPane());
     }
     
 }

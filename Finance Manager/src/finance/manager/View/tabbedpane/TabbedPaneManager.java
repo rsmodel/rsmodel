@@ -31,8 +31,16 @@ public class TabbedPaneManager {
         _tabbedPane = new JTabbedPane();
         
         JComponent panel1 = makeTextPanel("Panel #1");
+        panel1.setName("Init");
         _tabbedPane.addTab("Init", panel1); 
         
+    }
+    
+    public boolean panelExist(String name) {
+        boolean test = false;
+        for(int i = 0; i < _tabbedPane.getTabCount();++i)
+            test = (_tabbedPane.getTabComponentAt(i).getName()==name);
+        return test;
     }
     
     public void addPane(String name, JPanel panel) {

@@ -6,6 +6,10 @@
 package finance.manager.View.tabbedpane;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,36 +19,37 @@ import javax.swing.JPanel;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 
 /**
  *
  * @author User
  */
-public class DatabaseConnectionPane extends JPanel{
+public class DatabaseConnectionPane extends JPanel implements ActionListener{
     
     private Properties _prop = new Properties();
+    private JPanel _center = new JPanel(new GridLayout(2,2));
+    private JComboBox _database = new JComboBox();
+    private JTextField _databaselocation = new JTextField();
+    private JButton _commit = new JButton("Commit");
     
     public DatabaseConnectionPane() {
         super( new BorderLayout());
         this.add(new JLabel("Banco de dados"),BorderLayout.PAGE_START);
-        
-        _prop.setProperty("Database name", "main");        
-        _prop.setProperty("Database", "SQLite");        
-        _prop.setProperty("Database local", "db.db");
-        
-        saveProperties();
-        
-        InputStream is = getClass().getClassLoader().getResourceAsStream("database.properties");
-        if(is == null) {
-            System.out.println("file not found");
-            return;
-        }
+        this.setName("Banco de dados");
         try {
+            InputStream is = new FileInputStream("database.properties");
             _prop.load(is);
         } catch (IOException ex) {
             Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+        
+        createCenterPanel();
+        add(_center,BorderLayout.CENTER);
+        add(_commit,BorderLayout.PAGE_END);
+        _commit.addActionListener(this);
     }
     
     /**
@@ -59,5 +64,22 @@ public class DatabaseConnectionPane extends JPanel{
         } catch (IOException ex) {
             Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void createCenterPanel() {
+        _center.add(new JLabel("Database"));        
+        _database.addItem("SQLite");
+        _center.add(_database);
+        _center.add(new JLabel("Database location"));
+        _databaselocation.setText(_prop.getProperty("Database local"));
+        _center.add(_databaselocation);
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        _prop.setProperty("Database", (String)_database.getSelectedItem());
+        _prop.setProperty("Database local", _databaselocation.getText());
+        saveProperties();
     }
 }
