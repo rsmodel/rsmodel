@@ -31,7 +31,7 @@ public class TabbedPaneManager {
         _tabbedPane = new JTabbedPane();
         
         JComponent panel1 = makeTextPanel("Panel #1");
-        _tabbedPane.addTab("Init", panel1);
+        _tabbedPane.addTab("Init", panel1); 
         
     }
     
