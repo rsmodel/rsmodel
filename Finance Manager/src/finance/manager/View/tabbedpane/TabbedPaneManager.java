@@ -35,6 +35,10 @@ public class TabbedPaneManager {
         
     }
     
+    public void addPane(String name, JPanel panel) {
+        _tabbedPane.addTab(name, panel);
+    }
+    
     public void addTabbedPane(JFrame frame) {
         frame.add(_tabbedPane);
     }

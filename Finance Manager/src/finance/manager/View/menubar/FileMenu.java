@@ -5,6 +5,7 @@
  */
 package finance.manager.View.menubar;
 
+import finance.manager.Controller.menubar.arquivo.DatabaseFileMenuListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -15,7 +16,7 @@ import javax.swing.JMenuItem;
  */
 public class FileMenu {
     
-    JMenu _menu = new JMenu("File");
+    JMenu _menu = new JMenu("Arquivo");
     private static FileMenu _instance = new FileMenu();
     
     public static FileMenu getInstance() {
@@ -24,7 +25,9 @@ public class FileMenu {
     
     
     private FileMenu() {
-        _menu.add(new JMenuItem("Arquivo"));
+        JMenuItem _item = new JMenuItem("Banco de Dados");
+        _item.addActionListener(new DatabaseFileMenuListener());
+        _menu.add(_item);
     }
     
     public void addMenu(JMenuBar menubar) {
