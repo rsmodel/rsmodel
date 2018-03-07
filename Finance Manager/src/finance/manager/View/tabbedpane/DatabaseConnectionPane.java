@@ -6,6 +6,7 @@
 package finance.manager.View.tabbedpane;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 /**
  *
@@ -30,7 +32,7 @@ import javax.swing.JTextField;
 public class DatabaseConnectionPane extends JPanel implements ActionListener{
     
     private Properties _prop = new Properties();
-    private JPanel _center = new JPanel(new GridLayout(2,2));
+    private JPanel _center = new JPanel();
     private JComboBox _database = new JComboBox();
     private JTextField _databaselocation = new JTextField();
     private JButton _commit = new JButton("Commit");
@@ -67,12 +69,18 @@ public class DatabaseConnectionPane extends JPanel implements ActionListener{
     }
 
     private void createCenterPanel() {
-        _center.add(new JLabel("Database"));        
+        GridLayout gl = new GridLayout(2,2);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill=GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        _center.setLayout(gl);
+        _center.add(new JLabel("Database"),gbc);        
         _database.addItem("SQLite");
-        _center.add(_database);
-        _center.add(new JLabel("Database location"));
+        _center.add(_database,gbc);
+        _center.add(new JLabel("Database location"),gbc);
         _databaselocation.setText(_prop.getProperty("Database local"));
-        _center.add(_databaselocation);
+        _center.add(_databaselocation,gbc);
         
     }
 

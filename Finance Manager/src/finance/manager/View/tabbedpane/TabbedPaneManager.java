@@ -5,9 +5,15 @@
  */
 package finance.manager.View.tabbedpane;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
+import javafx.scene.layout.Border;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,6 +45,27 @@ public class TabbedPaneManager {
         if(_panels.containsKey(name)) return;
         _panels.put(name, panel);
         _tabbedPane.addTab(name, panel);
+        
+        int index = _tabbedPane.indexOfTab(name);
+        JPanel pnlTab = new JPanel(new GridBagLayout());
+        pnlTab.setOpaque(false);
+        JLabel lblTitle = new JLabel(name+" ");
+        JButton btnClose = new JButton("x");
+        btnClose.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+
+        pnlTab.add(lblTitle, gbc);
+
+        gbc.gridx++;
+        gbc.weightx = 2;
+        pnlTab.add(btnClose, gbc);
+
+        _tabbedPane.setTabComponentAt(index, pnlTab);
+
+        btnClose.addActionListener(new TabbedPaneTabCloseButton(name));
         
     }
     
