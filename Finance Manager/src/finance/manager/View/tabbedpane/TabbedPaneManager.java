@@ -66,6 +66,7 @@ public class TabbedPaneManager {
         _tabbedPane.setTabComponentAt(index, pnlTab);
 
         btnClose.addActionListener(new TabbedPaneTabCloseButton(name));
+        btnClose.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         
     }
     

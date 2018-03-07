@@ -24,6 +24,7 @@ public class MenubarManager {
         _menubar = new JMenuBar();
         
         FileMenu.getInstance().addMenu(_menubar);
+        PessoasMenu.getInstance().addMenu(_menubar);
         
     }
  

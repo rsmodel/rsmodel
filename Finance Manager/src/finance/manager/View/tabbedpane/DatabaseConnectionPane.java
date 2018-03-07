@@ -6,7 +6,9 @@
 package finance.manager.View.tabbedpane;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,19 +71,45 @@ public class DatabaseConnectionPane extends JPanel implements ActionListener{
     }
 
     private void createCenterPanel() {
-        GridLayout gl = new GridLayout(2,2);
+        GridBagLayout gl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.fill=GridBagConstraints.HORIZONTAL;
+        
+        gbc.ipadx = 16;
+        gbc.ipady = 0;
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
         _center.setLayout(gl);
         _center.add(new JLabel("Database"),gbc);        
         _database.addItem("SQLite");
+        
+        gbc.ipadx = 400;
+        gbc.ipady = 0;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridwidth = 0;
+        gbc.fill=GridBagConstraints.HORIZONTAL;
         _center.add(_database,gbc);
+        
+        gbc.ipadx = 16;
+        gbc.ipady = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
         _center.add(new JLabel("Database location"),gbc);
         _databaselocation.setText(_prop.getProperty("Database local"));
-        _center.add(_databaselocation,gbc);
+        _databaselocation.setColumns(512);
         
+        gbc.ipadx = 400;
+        gbc.ipady = 0;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 0;
+        gbc.fill=GridBagConstraints.HORIZONTAL;
+        _center.add(_databaselocation,gbc);
     }
 
     @Override
