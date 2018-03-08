@@ -19,5 +19,11 @@ public class ClienteTableColumnModel extends DefaultTableModel{
     
     public ClienteTableColumnModel() {
         super();
+        
+        this.addColumn("ID");
+        this.addColumn("Razao Social");
+        this.addColumn("Nome Fantasia");
+        this.setRowCount(100);
+        
     }
 }

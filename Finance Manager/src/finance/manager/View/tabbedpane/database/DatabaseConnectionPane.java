@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package finance.manager.View.tabbedpane;
+package finance.manager.View.tabbedpane.database;
 
+import finance.manager.model.DatabaseManager;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -25,7 +24,6 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 
 /**
  *
@@ -56,19 +54,6 @@ public class DatabaseConnectionPane extends JPanel implements ActionListener{
         _commit.addActionListener(this);
     }
     
-    /**
-     *
-     */
-    public void saveProperties() {
-        try {
-            _prop.store(new FileOutputStream("database.properties"), null);
-            //InputStream is = getClass().getClassLoader().getResourceAsStream("database.config");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     private void createCenterPanel() {
         GridBagLayout gl = new GridBagLayout();
@@ -116,6 +101,6 @@ public class DatabaseConnectionPane extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         _prop.setProperty("Database", (String)_database.getSelectedItem());
         _prop.setProperty("Database local", _databaselocation.getText());
-        saveProperties();
+        DatabaseManager.getInstance().saveProperties();
     }
 }

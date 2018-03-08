@@ -5,7 +5,7 @@
  */
 package finance.manager.Controller.menubar.arquivo;
 
-import finance.manager.View.tabbedpane.DatabaseConnectionPane;
+import finance.manager.View.tabbedpane.database.DatabaseConnectionPane;
 import finance.manager.View.tabbedpane.TabbedPaneManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

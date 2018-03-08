@@ -5,12 +5,17 @@
  */
 package finance.manager.model;
 
+import finance.manager.View.tabbedpane.database.DatabaseConnectionPane;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +29,7 @@ public class DatabaseManager {
     public static DatabaseManager getInstance(){
         return _instance;
     }
+    private Properties _prop;
     
     private DatabaseManager() {
         try {
@@ -31,9 +37,17 @@ public class DatabaseManager {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            InputStream is = new FileInputStream("database.properties");
+            _prop.load(is);
+        } catch (IOException ex) {
+            Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        addSqliteDatabase(_prop.getProperty("Database local"), _prop.getProperty("Database name"));
     }
     
-    private HashMap<String,Connection> _connections = new HashMap<String,Connection>();
+    private HashMap<String,DatabaseConfig> _connections = new HashMap<String,DatabaseConfig>();
     
     public void addSqliteDatabase(String database,String db) {
         Connection conn = null;
@@ -46,6 +60,22 @@ public class DatabaseManager {
         {
             System.err.println(e.getMessage());
         }
-        if(conn != null) _connections.put(db, conn);
+        if(conn != null) _connections.put(db, new DatabaseConfig(conn, "SQLite", database));
+    }
+    public DatabaseConfig getDatabaseConfig(String db) {
+        return _connections.get(db);
+    }
+    public void saveProperties() {
+        try {
+            _prop.setProperty("Database name", "main");
+            _prop.setProperty("Database", _connections.get("main").getDatabase());
+            _prop.setProperty("Database local", _connections.get("main").getLocal_database());
+            _prop.store(new FileOutputStream("database.properties"), null);
+            //InputStream is = getClass().getClassLoader().getResourceAsStream("database.config");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
