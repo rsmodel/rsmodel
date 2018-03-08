@@ -10,6 +10,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -17,7 +19,7 @@ import javax.swing.JTable;
  */
 public class ClientePane extends JPanel {
     
-    private JTable _table = new JTable();
+    private JTable _table = null;
     
     public ClientePane() {
         super(new GridBagLayout());
