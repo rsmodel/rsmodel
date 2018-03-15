@@ -16,8 +16,7 @@ import java.awt.event.ActionListener;
  */
 public class PessoasMenuListener implements ActionListener{
 
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("finance.manager.Controller.menubar.arquivo.PessoasMenuListener.actionPerformed()");        
+    public void actionPerformed(ActionEvent e) {     
         switch(e.getActionCommand()) {
             case "Cliente":
                 TabbedPaneManager.getInstance().addPane("Cliente", new ClientePane());

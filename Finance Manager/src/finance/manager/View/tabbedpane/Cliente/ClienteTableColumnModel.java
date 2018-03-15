@@ -5,11 +5,7 @@
  */
 package finance.manager.View.tabbedpane.Cliente;
 
-import javax.swing.event.TableColumnModelEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -19,6 +15,12 @@ public class ClienteTableColumnModel extends DefaultTableModel{
     
     public ClienteTableColumnModel() {
         super();
+        
+        initColumns();
+        
+    }
+
+    private void initColumns() {
         
         this.addColumn("ID");
         this.addColumn("Razao Social");

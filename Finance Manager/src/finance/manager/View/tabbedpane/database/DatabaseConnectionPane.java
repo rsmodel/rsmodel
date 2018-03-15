@@ -11,16 +11,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -31,7 +23,6 @@ import javax.swing.JTextField;
  */
 public class DatabaseConnectionPane extends JPanel implements ActionListener{
     
-    private Properties _prop = new Properties();
     private JPanel _center = new JPanel();
     private JComboBox _database = new JComboBox();
     private JTextField _databaselocation = new JTextField();
@@ -41,12 +32,6 @@ public class DatabaseConnectionPane extends JPanel implements ActionListener{
         super( new BorderLayout());
         this.add(new JLabel("Banco de dados"),BorderLayout.PAGE_START);
         this.setName("Banco de dados");
-        try {
-            InputStream is = new FileInputStream("database.properties");
-            _prop.load(is);
-        } catch (IOException ex) {
-            Logger.getLogger(DatabaseConnectionPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         createCenterPanel();
         add(_center,BorderLayout.CENTER);
@@ -85,7 +70,7 @@ public class DatabaseConnectionPane extends JPanel implements ActionListener{
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         _center.add(new JLabel("Database location"),gbc);
-        _databaselocation.setText(_prop.getProperty("Database local"));
+        _databaselocation.setText(DatabaseManager.getInstance().getDatabaseConfig("main").getLocal_database());
         _databaselocation.setColumns(512);
         
         gbc.ipadx = 400;
@@ -99,8 +84,12 @@ public class DatabaseConnectionPane extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        _prop.setProperty("Database", (String)_database.getSelectedItem());
-        _prop.setProperty("Database local", _databaselocation.getText());
+        DatabaseManager.getInstance().removeDatabase("main");
+        switch((String)_database.getSelectedItem()) {
+            case "SQLite":
+                DatabaseManager.getInstance().addSqliteDatabase(_databaselocation.getText(), "main");
+                break;
+        }
         DatabaseManager.getInstance().saveProperties();
     }
 }

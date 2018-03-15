@@ -24,12 +24,13 @@ import java.util.logging.Logger;
  * @author User
  */
 public class DatabaseManager {
-    private static DatabaseManager _instance = new DatabaseManager();
+    private static DatabaseManager _instance = null;
         
     public static DatabaseManager getInstance(){
+        if(_instance == null) _instance = new DatabaseManager();
         return _instance;
     }
-    private Properties _prop;
+    private Properties _prop = new Properties();
     
     private DatabaseManager() {
         try {
@@ -62,9 +63,21 @@ public class DatabaseManager {
         }
         if(conn != null) _connections.put(db, new DatabaseConfig(conn, "SQLite", database));
     }
+    
+    public void removeDatabase(String db) {
+        try {
+            _connections.get(db).getConn().close();
+            _connections.remove(db);
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public DatabaseConfig getDatabaseConfig(String db) {
         return _connections.get(db);
     }
+    
     public void saveProperties() {
         try {
             _prop.setProperty("Database name", "main");
