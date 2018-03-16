@@ -13,6 +13,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 public class GlobalDataCliente {
     
     private static GlobalDataCliente _instance = null;
+    private Hashtable<Integer,ClienteData> _clientes = null;
     
     public static GlobalDataCliente getInstance() {
         if(_instance == null ) _instance = new GlobalDataCliente();
@@ -30,7 +32,6 @@ public class GlobalDataCliente {
     private GlobalDataCliente() {
         loadData();
     }
-    private Hashtable<Integer,ClienteData> _clientes = null;
     
     public Enumeration<ClienteData> getClienteEnumeration(){
         return _clientes.elements();

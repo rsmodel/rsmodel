@@ -6,6 +6,7 @@
 package finance.manager.View.tabbedpane.Cliente;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.TextField;
@@ -15,38 +16,54 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author User
  */
-public class ClientePane extends JPanel {
+public class ClientePane extends JPanel implements ListSelectionListener {
     
     private JTable _table = null;
     private JScrollPane _sp_table = null;
     private JPanel _panel = null;
+    private JComboBox<String> _fj = null;
+    private JTextField _tf_cpf_cnpj = null;
+    private JTextField _tf_ie = null;
+    private JTextField _tf_fone = null;
+    private JTextField _tf_email = null;
+    private JTextField _tf_endereco = null;
+    private JTextField _tf_complemento = null;
+    private JTextField _tf_cep = null;
+    private JTextField _tf_cidade = null;
+    private JTextField _tf_uf = null;
+    private JTextField _tf_bairro = null;
+    private JTextField _tf_num_end = null;
+    private JTextField _tf_vendedor = null;
+    private JTextField _tf_transportador = null;
+    
     public ClientePane() {
         super(new BorderLayout());
         
-        createTable();
+        createSplitPane();
+        
     }
 
     private void createTable() {
         _table = new JTable(new ClienteTableColumnModel());
+        _table.setColumnSelectionAllowed(false);
+        _table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        _table.getSelectionModel().addListSelectionListener(this);
         _sp_table = new JScrollPane(_table);
-        _panel = createSecondPanel();
-        JSplitPane sp = new JSplitPane(
-                JSplitPane.HORIZONTAL_SPLIT,
-                _sp_table,
-                _panel);
-        
-        
-        this.add(sp, BorderLayout.CENTER);
+        _sp_table.setMinimumSize(new Dimension(300,0));
         
    }
     
-    private JPanel createSecondPanel() {
-        JPanel panel = new JPanel(new GridBagLayout());
+    private void createSecondPanel() {
+        _panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.PAGE_START;
         gbc.fill=GridBagConstraints.HORIZONTAL;
@@ -57,55 +74,76 @@ public class ClientePane extends JPanel {
         gbc.gridy = 0;
         //gbc.gridwidth = 1;
         //gbc.gridheight = 1;
-        panel.add(new JLabel("Fisíca/Jurídica"),gbc);
-        JComboBox fj = new JComboBox();
-        fj.addItem("F");
-        fj.addItem("J");
+        _panel.add(new JLabel("Fisíca/Jurídica"),gbc);
+        _fj = new JComboBox<>();
+        _fj.addItem("F");
+        _fj.addItem("J");        
         gbc.gridx = 1;
         gbc.gridy = 0;
-        panel.add(fj,gbc);
+        _panel.add(_fj,gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panel.add(new JLabel("CPF/CNPJ"),gbc);
+        _panel.add(new JLabel("CPF/CNPJ"),gbc);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        panel.add(new TextField(),gbc);        
+        _panel.add(new TextField(),gbc);        
         gbc.gridx = 0;
         gbc.gridy = 2;
-        panel.add(new JLabel("Inscrição Estadual"),gbc);
+        _panel.add(new JLabel("Inscrição Estadual"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 3;
-        panel.add(new JLabel("Telefone"),gbc);
+        _panel.add(new JLabel("Telefone"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 4;
-        panel.add(new JLabel("Email"),gbc);
+        _panel.add(new JLabel("Email"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 5;
-        panel.add(new JLabel("Endereco"),gbc);
+        _panel.add(new JLabel("Endereco"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 6;
-        panel.add(new JLabel("Complemento"),gbc);
+        _panel.add(new JLabel("Complemento"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 7;
-        panel.add(new JLabel("CEP"),gbc);
+        _panel.add(new JLabel("CEP"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 8;
-        panel.add(new JLabel("Cidade"),gbc);
+        _panel.add(new JLabel("Cidade"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 9;
-        panel.add(new JLabel("UF"),gbc);
+        _panel.add(new JLabel("UF"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 10;
-        panel.add(new JLabel("Bairro"),gbc);
+        _panel.add(new JLabel("Bairro"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 11;
-        panel.add(new JLabel("Numero do Endereco"),gbc);
+        _panel.add(new JLabel("Numero do Endereco"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 12;
-        panel.add(new JLabel("Vendedor"),gbc);
+        _panel.add(new JLabel("Vendedor"),gbc);
         gbc.gridx = 0;
         gbc.gridy = 13;
-        panel.add(new JLabel("Transportador"),gbc);
-        return panel;
+        _panel.add(new JLabel("Transportador"),gbc);
+        _panel.setMinimumSize(new Dimension(300,0));
+        
     }
+
+    private void createSplitPane() {
+        createTable();
+        createSecondPanel();
+        JSplitPane sp = new JSplitPane(
+                JSplitPane.HORIZONTAL_SPLIT,
+                _sp_table,
+                _panel);
+        
+        
+        this.add(sp, BorderLayout.CENTER);
+    }
+    
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        
+        System.out.print("Selected: ");
+        System.out.println(_table.getValueAt(_table.getSelectedRow(), 0));
+      }
+
 }
