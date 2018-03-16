@@ -5,6 +5,9 @@
  */
 package finance.manager.View.tabbedpane.Cliente;
 
+import finance.manager.model.GlobalDataCliente;
+import finance.manager.model.data.ClienteData;
+import java.util.Enumeration;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,7 +28,15 @@ public class ClienteTableColumnModel extends DefaultTableModel{
         this.addColumn("ID");
         this.addColumn("Razao Social");
         this.addColumn("Nome Fantasia");
-        this.setRowCount(100);
+        this.setRowCount(GlobalDataCliente.getInstance().getClienteNum());
+        Enumeration<ClienteData> cliente = GlobalDataCliente.getInstance().getClienteEnumeration();
+        int i = 0;
+        while(cliente.hasMoreElements()){
+            ClienteData cd = cliente.nextElement();
+            this.setValueAt(cd.getId(), i, 0);
+            this.setValueAt(cd.getRazao_social(), i, 1);
+            this.setValueAt(cd.getNome_fantasia(), i++, 2);
+        }
         
     }
 }

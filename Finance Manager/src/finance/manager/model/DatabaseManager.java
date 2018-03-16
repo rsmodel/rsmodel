@@ -54,7 +54,7 @@ public class DatabaseManager {
         Connection conn = null;
         try
         {
-            conn = DriverManager.getConnection("jdbc:sqlite:" + db);
+            conn = DriverManager.getConnection("jdbc:sqlite:" + database);
             
         }
         catch(SQLException e)

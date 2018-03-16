@@ -9,6 +9,7 @@ import finance.manager.model.data.ClienteData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,19 @@ public class GlobalDataCliente {
         loadData();
     }
     private Hashtable<Integer,ClienteData> _clientes = null;
+    
+    public Enumeration<ClienteData> getClienteEnumeration(){
+        return _clientes.elements();
+    }
+    
+    public int getClienteNum() {
+        return _clientes.size();
+    }
+    
+    public ClienteData getCliente(int id) {
+        return _clientes.get(id);
+    }
+    
     private void loadData() {
         _clientes = new Hashtable<Integer, ClienteData>();
         try {
