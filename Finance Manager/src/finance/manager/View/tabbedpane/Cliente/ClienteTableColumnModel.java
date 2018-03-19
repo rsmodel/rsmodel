@@ -22,7 +22,11 @@ public class ClienteTableColumnModel extends DefaultTableModel{
         initColumns();
         
     }
-
+    
+    @Override
+    public boolean isCellEditable(int row, int column){  
+          return false;  
+      }
     private void initColumns() {
         
         this.addColumn("ID");
