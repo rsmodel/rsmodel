@@ -5,6 +5,8 @@
  */
 package finance.manager.View.tabbedpane.Cliente;
 
+import finance.manager.model.GlobalDataCliente;
+import finance.manager.model.data.ClienteData;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -28,6 +30,7 @@ import javax.swing.event.ListSelectionListener;
 public class ClientePane extends JPanel implements ListSelectionListener {
     
     private JTable _table = null;
+    private JSplitPane _sp_mainpane = null;
     private JScrollPane _sp_table = null;
     private JPanel _panel = null;
     private JComboBox<String> _fj = null;
@@ -44,6 +47,8 @@ public class ClientePane extends JPanel implements ListSelectionListener {
     private JTextField _tf_num_end = null;
     private JTextField _tf_vendedor = null;
     private JTextField _tf_transportador = null;
+    
+    private int _selected_line = 0;
     
     public ClientePane() {
         super(new BorderLayout());
@@ -86,13 +91,24 @@ public class ClientePane extends JPanel implements ListSelectionListener {
         _panel.add(new JLabel("CPF/CNPJ"),gbc);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        _panel.add(new TextField(),gbc);        
+        _tf_cpf_cnpj = new JTextField();
+        _panel.add(_tf_cpf_cnpj,gbc);        
         gbc.gridx = 0;
         gbc.gridy = 2;
         _panel.add(new JLabel("Inscrição Estadual"),gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        _tf_ie = new JTextField();
+        _panel.add( _tf_ie, gbc);
+        /// --- Telefone
         gbc.gridx = 0;
         gbc.gridy = 3;
         _panel.add(new JLabel("Telefone"),gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        _tf_fone = new JTextField();
+        _panel.add(_tf_fone,gbc);
+        /// --- EMAIL
         gbc.gridx = 0;
         gbc.gridy = 4;
         _panel.add(new JLabel("Email"),gbc);
@@ -130,18 +146,33 @@ public class ClientePane extends JPanel implements ListSelectionListener {
     private void createSplitPane() {
         createTable();
         createSecondPanel();
-        JSplitPane sp = new JSplitPane(
+        _sp_mainpane = new JSplitPane(
                 JSplitPane.HORIZONTAL_SPLIT,
                 _sp_table,
                 _panel);
+        _panel.setVisible(false);
+        this.add(_sp_mainpane, BorderLayout.CENTER);
         
         
-        this.add(sp, BorderLayout.CENTER);
     }
     
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        
+        if(_selected_line ==  ((Integer)_table.getValueAt(_table.getSelectedRow(), 0))) 
+            return;
+        _selected_line = ((Integer)_table.getValueAt(_table.getSelectedRow(), 0));
+        if(!_panel.isVisible()) {
+            _panel.setVisible(true);
+            _sp_mainpane.setDividerLocation(0.25f);
+        }
+        ClienteData c = GlobalDataCliente.getInstance().getCliente(_selected_line);
+        if(c.getF_j()== "F") 
+            _fj.setSelectedIndex(0);
+        else
+            _fj.setSelectedIndex(1);
+        _tf_cpf_cnpj.setText(c.getCPF_CNPJ());
+        _tf_ie.setText(c.getInscrição_estadual());
+        _tf_fone.setText(c.getFone());
         System.out.print("Selected: ");
         System.out.println(_table.getValueAt(_table.getSelectedRow(), 0));
       }

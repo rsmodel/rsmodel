@@ -19,7 +19,7 @@ public class FinanceManager {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-              
+        
         MainFrame mf = new MainFrame();
         mf.setVisible(true);
         mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
