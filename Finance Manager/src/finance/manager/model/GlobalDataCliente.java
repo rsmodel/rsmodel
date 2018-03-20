@@ -13,7 +13,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -50,7 +49,9 @@ public class GlobalDataCliente {
         try {
             Statement stmt = DatabaseManager.getInstance().getDatabaseConfig("main").getConn().createStatement();
             ResultSet rs = stmt.executeQuery("select * from Cliente");
+            
             while(rs.next()) {
+                
                 ClienteData cd = 
                         new ClienteData( 
                                 rs.getInt("ID"), 

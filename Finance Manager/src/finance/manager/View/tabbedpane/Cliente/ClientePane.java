@@ -61,6 +61,7 @@ public class ClientePane extends JPanel implements ListSelectionListener {
     private void createSecondPanel() {
         _panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        JTextFieldClienteComponentFactory cliente_factory = new JTextFieldClienteComponentFactory();
         ComponentOrganizerGridBag cog = new ComponentOrganizerGridBag(_panel, gbc);
         cog.setAnchor(GridBagConstraints.PAGE_START);
         cog.setFill(GridBagConstraints.HORIZONTAL);
@@ -71,58 +72,59 @@ public class ClientePane extends JPanel implements ListSelectionListener {
         _cs.getJComboBox("fj").addItem("F");
         _cs.getJComboBox("fj").addItem("J");       
         cog.addComponentPos(_cs.getJComboBox("fj"),1,0);
+        _cs.getJComboBox("fj").setEnabled(false);
         // CPF CNPJ
         cog.addComponentPos(new JLabel("CPF/CNPJ"),0,1);
-        _cs.addComponent("cpf_cnpj", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("cpf_cnpj"), 1, 1);
+        cog.addComponentPos(
+                _cs.addComponent("cpf_cnpj", cliente_factory), 1, 1);
         // Inscrição Estadual
-        cog.addComponentPos(new JLabel("Inscrição Estadual"),0,2);
-        _cs.addComponent("ie", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("ie"), 1, 2);
+        cog.addComponentPos(new JLabel("Inscrição Estadual"),0,2);        
+        cog.addComponentPos(
+                _cs.addComponent("ie", cliente_factory), 1, 2);
         //Telefone
-        cog.addComponentPos(new JLabel("Telefone"), 0, 3);
-        _cs.addComponent("fone", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("fone"), 1, 3);
+        cog.addComponentPos(new JLabel("Telefone"), 0, 3);        
+        cog.addComponentPos(
+                _cs.addComponent("fone", cliente_factory), 1, 3);
         /// --- EMAIL
-        cog.addComponentPos(new JLabel("E-mail"), 0, 4);
-        _cs.addComponent("email", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("email"), 1, 4);
+        cog.addComponentPos(new JLabel("E-mail"), 0, 4);        
+        cog.addComponentPos(
+                _cs.addComponent("email", cliente_factory), 1, 4);
         // Endereço
-        cog.addComponentPos(new JLabel("Endereco"), 0, 5);
-        _cs.addComponent("endereco", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("endereco"), 1, 5);
+        cog.addComponentPos(new JLabel("Endereco"), 0, 5);        
+        cog.addComponentPos(
+                _cs.addComponent("endereco", cliente_factory), 1, 5);
         // Complemento
-        cog.addComponentPos(new JLabel("Complemento"), 0, 6);
-        _cs.addComponent("complemento", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("complemento"), 1, 6);
+        cog.addComponentPos(new JLabel("Complemento"), 0, 6);        
+        cog.addComponentPos(
+                _cs.addComponent("complemento", cliente_factory), 1, 6);
         // CEP
-        cog.addComponentPos(new JLabel("CEP"), 0, 7);
-        _cs.addComponent("cep", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("cep"), 1, 7);
+        cog.addComponentPos(new JLabel("CEP"), 0, 7);        
+        cog.addComponentPos(
+                _cs.addComponent("cep", cliente_factory), 1, 7);
         // Cidade
-        cog.addComponentPos(new JLabel("Cidade"), 0, 8);
-        _cs.addComponent("cidade", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("cidade"), 1, 8);
+        cog.addComponentPos(new JLabel("Cidade"), 0, 8);        
+        cog.addComponentPos(
+                _cs.addComponent("cidade", cliente_factory), 1, 8);
         // UF
-        cog.addComponentPos(new JLabel("UF"), 0, 9);
-        _cs.addComponent("uf", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("uf"), 1, 3);
+        cog.addComponentPos(new JLabel("UF"), 0, 9);        
+        cog.addComponentPos(
+                _cs.addComponent("uf", cliente_factory), 1, 3);
         // Bairro
-        cog.addComponentPos(new JLabel("Bairro"), 0, 10);
-        _cs.addComponent("bairro", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("bairro"), 1, 10);
+        cog.addComponentPos(new JLabel("Bairro"), 0, 10);        
+        cog.addComponentPos(
+                _cs.addComponent("bairro", cliente_factory), 1, 10);
         // Numero de Endereço
         cog.addComponentPos(new JLabel("Numero do Endereco"), 0, 11);
-        _cs.addComponent("num", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("num"), 1, 11);
+        cog.addComponentPos(
+                _cs.addComponent("num", cliente_factory), 1, 11);
         // Vendedor
-        cog.addComponentPos(new JLabel("Vendedor"), 0, 12);
-        _cs.addComponent("vendedor", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("vendedor"), 1, 12);
+        cog.addComponentPos(new JLabel("Vendedor"), 0, 12);        
+        cog.addComponentPos(
+                _cs.addComponent("vendedor", cliente_factory), 1, 12);
         // Transportador
-        cog.addComponentPos(new JLabel("Transportador"), 0, 13);
-        _cs.addComponent("transportador", new JTextField());
-        cog.addComponentPos(_cs.getJTextField("transportador"), 1, 13);
+        cog.addComponentPos(new JLabel("Transportador"), 0, 13);        
+        cog.addComponentPos(
+                _cs.addComponent("transportador", cliente_factory), 1, 13);
         //fim
         _panel.setMinimumSize(new Dimension(300,0));
         
@@ -169,8 +171,6 @@ public class ClientePane extends JPanel implements ListSelectionListener {
         _cs.getJTextField("vendedor").setText(String.valueOf(c.getVendedor()));
         _cs.getJTextField("transportador").setText(String.valueOf(c.getTransportador()));
         
-        System.out.print("Selected: ");
-        System.out.println(_table.getValueAt(_table.getSelectedRow(), 0));
       }
 
 }

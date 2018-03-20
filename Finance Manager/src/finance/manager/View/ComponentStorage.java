@@ -5,6 +5,7 @@
  */
 package finance.manager.View;
 
+import finance.manager.View.ComponentFactory.AbstractComponentFactory;
 import java.util.HashMap;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -22,8 +23,14 @@ public class ComponentStorage {
     public ComponentStorage(){
     }
     
-    public void addComponent(String name, JComponent comp) {
+    public JComponent addComponent(String name, JComponent comp) {
         _component.put(name, comp);
+        return comp;
+    }
+    
+    public JComponent addComponent(String name, AbstractComponentFactory acf) {
+        _component.put(name,acf.buildComponent());
+        return _component.get(name);
     }
     
     public JTextField getJTextField(String name) {

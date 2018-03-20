@@ -6,6 +6,7 @@
 package finance.manager;
 
 import finance.manager.View.MainFrame;
+import finance.manager.model.GlobalDataVendedor;
 import javax.swing.JFrame;
 
 /**
@@ -19,7 +20,7 @@ public class FinanceManager {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        GlobalDataVendedor.getInstance();
         MainFrame mf = new MainFrame();
         mf.setVisible(true);
         mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
