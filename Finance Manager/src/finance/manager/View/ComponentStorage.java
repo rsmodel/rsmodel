@@ -44,4 +44,8 @@ public class ComponentStorage {
     public JTable getJTable(String name) {
         return (JTable) _component.get(name);
     }
+
+    public JComponent getJComponent(String name) {
+        return _component.get(name);
+    }
 }

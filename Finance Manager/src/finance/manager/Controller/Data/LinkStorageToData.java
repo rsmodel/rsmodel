@@ -5,6 +5,9 @@
  */
 package finance.manager.Controller.Data;
 
+import finance.manager.View.ComponentStorage;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Vector;
 import javafx.util.Pair;
 
@@ -13,15 +16,29 @@ import javafx.util.Pair;
  * @author User
  */
 public class LinkStorageToData {
-    private Vector<Pair<String, String>> _link = new Vector<>();
+    private Vector<Link> _link = new Vector<>();
     
     public LinkStorageToData () {
         
     }
     
-    public void addLink(String Data, String Storage)  {
-        
+    public void addLink(String Data, String Storage, LinkAction la)  {
+        _link.add(new Link(Data, Storage, la));
     }
     
+    public void apply(ComponentStorage cs, HashMap<String,String> _map) {
+        Iterator<Link> iter =  _link.iterator();
+        while(iter.hasNext()) {
+            Link l = iter.next();
+            l.fromFistToSecond(cs, _map);
+        }
+    }
     
+    public void apply(HashMap<String,String> _map, ComponentStorage cs) {
+        Iterator<Link> iter =  _link.iterator();
+        while(iter.hasNext()) {
+            Link l = iter.next();
+            l.fromFistToSecond(cs, _map);
+        }
+    }
 }
