@@ -9,6 +9,7 @@ import finance.manager.View.MainFrame;
 import finance.manager.model.GlobalDataVendedor;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -39,6 +40,10 @@ public class FinanceManager {
                "sysdba",
                "masterkey");
             stm = con.createStatement();
+            ResultSet res = stm.executeQuery("select * from PRODUTOS");
+            while (res.next()) {
+                System.out.println(res.getString("DESCRICAO"));
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FinanceManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
