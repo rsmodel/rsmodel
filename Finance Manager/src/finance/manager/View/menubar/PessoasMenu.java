@@ -24,12 +24,17 @@ public class PessoasMenu {
     }
     
     private PessoasMenu() {
+        PessoasMenuListener pml = new PessoasMenuListener();
         JMenuItem _item = new JMenuItem("Cliente");
-        _item.addActionListener(new PessoasMenuListener());
+        _item.addActionListener(pml);
         _menu.add(_item);
         
         _item = new JMenuItem("Fornecedor");
-        _item.addActionListener(new PessoasMenuListener());
+        _item.addActionListener(pml);
+        _menu.add(_item);
+        
+        _item = new JMenuItem("Vendedor");
+        _item.addActionListener(pml);
         _menu.add(_item);
     }
     
