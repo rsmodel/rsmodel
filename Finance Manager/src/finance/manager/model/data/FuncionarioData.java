@@ -16,10 +16,10 @@ import java.util.logging.Logger;
  *
  * @author User
  */
-public class VendedorData {
+public class FuncionarioData {
     private HashMap<String,String> _data = null;
     
-    public VendedorData() {        
+    public FuncionarioData() {        
         this._data = new HashMap<>();
     }
     

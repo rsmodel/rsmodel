@@ -6,9 +6,11 @@
 package finance.manager.Controller.menubar.arquivo;
 
 import finance.manager.View.tabbedpane.Cliente.ClientePane;
+import finance.manager.View.tabbedpane.Funcionario.FuncionarioPane;
 import finance.manager.View.tabbedpane.TabbedPaneManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,6 +22,9 @@ public class PessoasMenuListener implements ActionListener{
         switch(e.getActionCommand()) {
             case "Cliente":
                 TabbedPaneManager.getInstance().addPane("Cliente", new ClientePane());
+                break;
+            case "Funcionario":
+                TabbedPaneManager.getInstance().addPane("Funcionario", new FuncionarioPane());
                 break;
         }
     }

@@ -36,6 +36,10 @@ public class PessoasMenu {
         _item = new JMenuItem("Vendedor");
         _item.addActionListener(pml);
         _menu.add(_item);
+        
+        _item = new JMenuItem("Funcionario");
+        _item.addActionListener(pml);
+        _menu.add(_item);
     }
     
     public void addMenu(JMenuBar menubar) {
