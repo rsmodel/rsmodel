@@ -30,7 +30,7 @@ public class FinanceManager {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
+/*        try {
             // TODO code application logic here
 
             Class.forName("org.firebirdsql.jdbc.FBDriver");
@@ -49,7 +49,7 @@ public class FinanceManager {
         } catch (SQLException ex) {
            Logger.getLogger(FinanceManager.class.getName()).log(Level.SEVERE, null, ex);
        }
-        
+  */      
         GlobalDataVendedor.getInstance();
         MainFrame mf = new MainFrame();
         mf.setVisible(true);

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <Endereco>
+        <JLabel>Endereço</JLabel>
+        <JTextField></JTextField>
+    </Endereco>
+    <CEP>
+        <JLabel>CEP</JLabel>
+        <JTextField></JTextField>
+    </CEP>
+</root>
