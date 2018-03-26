@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <root>
-    <Endereco>
-        <JLabel>Endereço</JLabel>
-        <JTextField></JTextField>
-    </Endereco>
-    <CEP>
-        <JLabel>CEP</JLabel>
-        <JTextField></JTextField>
-    </CEP>
+    <Variable name="Endereco">
+        <JLabel name="label_endereco" text="Endereco" x="0" y="0"/>
+        <JTextField name="endereco" x="1" y="0"/>
+    </Variable>
+    <Variable name="CEP">
+        <JLabel name="label_cep" text="CEP" x="0" y="1"/>
+        <JTextField name="cep" x="1" y="1"/>
+    </Variable>
+    <Variable name="Cidade">
+        <JLabel name="label_cidade" text="Cidade" x="0" y="2"/>
+        <JTextField name="cidade" x="1" y="2"/>
+    </Variable>
+    <Variable name="UF">
+        <JLabel name="label_uf" text="UF" x="0" y="3"/>
+        <JTextField name="uf" x="1" y="3"/>
+    </Variable>
 </root>

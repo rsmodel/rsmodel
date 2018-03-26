@@ -9,7 +9,6 @@ import finance.manager.View.ComponentStorage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
-import javafx.util.Pair;
 
 /**
  *
