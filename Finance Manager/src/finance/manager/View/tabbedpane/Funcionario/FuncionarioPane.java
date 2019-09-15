@@ -38,6 +38,7 @@ public class FuncionarioPane extends JPanel implements ListSelectionListener{
         createTablePane();
         createInfoPane();
         _sp_main.setLeftComponent(_sp_table);
+        _sp_main.setRightComponent(_info_pane);
         add(_sp_main,BorderLayout.CENTER);
     }
 
